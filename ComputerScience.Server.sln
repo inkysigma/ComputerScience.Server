@@ -10,7 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComputerScience.Server", "src\ComputerScience.Server\ComputerScience.Server.xproj", "{2569F3C0-6658-4C23-A8B8-71753725E403}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComputerScience.Server.Console", "src\ComputerScience.Server.Console\ComputerScience.Server.Console.xproj", "{E8E5B26E-23F0-4CA0-A316-75827A39736E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComputerScience.Server.Web", "src\ComputerScience.Server.Web\ComputerScience.Server.Web.xproj", "{2569F3C0-6658-4C23-A8B8-71753725E403}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +20,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8E5B26E-23F0-4CA0-A316-75827A39736E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E5B26E-23F0-4CA0-A316-75827A39736E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E5B26E-23F0-4CA0-A316-75827A39736E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E5B26E-23F0-4CA0-A316-75827A39736E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2569F3C0-6658-4C23-A8B8-71753725E403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2569F3C0-6658-4C23-A8B8-71753725E403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2569F3C0-6658-4C23-A8B8-71753725E403}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +33,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{E8E5B26E-23F0-4CA0-A316-75827A39736E} = {ADD4D482-4C3C-48D9-900C-71DF5B63B950}
 		{2569F3C0-6658-4C23-A8B8-71753725E403} = {ADD4D482-4C3C-48D9-900C-71DF5B63B950}
 	EndGlobalSection
 EndGlobal
