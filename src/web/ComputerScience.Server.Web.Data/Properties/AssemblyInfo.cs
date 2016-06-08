@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ComputerScience.Server.Console")]
+[assembly: AssemblyProduct("ComputerScience.Server.Web.Data")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -15,4 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e8e5b26e-23f0-4ca0-a316-75827a39736e")]
+[assembly: Guid("9c7217d4-14c6-400d-b483-8c624fd7aa34")]

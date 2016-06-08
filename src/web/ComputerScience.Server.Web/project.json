@@ -13,13 +13,17 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final"
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+    "ComputerScience.Server.Web.Data": "1.0.0-*",
+    "ComputerScience.Server.Web.Models": "1.0.0-*",
+    "ComputerScience.Server.Web.Business": "1.0.0-*" 
   },
 
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
       "version": "1.0.0-preview1-final",
-      "imports": "portable-net45+win8+dnxcore50"
+      "imports": "portable-net45+win8+dnxcore50+netstandard15"
     }
   },
 
@@ -28,7 +32,8 @@
       "imports": [
         "dotnet5.6",
         "dnxcore50",
-        "portable-net45+win8"
+        "portable-net45+win8",
+        "netstandard1.5"
       ]
     }
   },

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ComputerScience.Server.Web
@@ -14,6 +15,7 @@ namespace ComputerScience.Server.Web
                 .UseStartup<Startup>()
                 .Build();
 
+            Console.Write("Stable");
             host.Run();
         }
     }
