@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ComputerScience.Server.Common;
+﻿using ComputerScience.Server.Common;
 
 namespace ComputerScience.Server.Web.Models.Exception
 {

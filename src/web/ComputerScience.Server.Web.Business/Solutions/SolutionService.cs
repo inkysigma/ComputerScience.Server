@@ -52,7 +52,7 @@ namespace ComputerScience.Server.Web.Business.Solutions
             if (await SolutionCache.FetchSizeAsync(cancellationToken) > Configuration.MaxCache)
                 return SolutionServiceResult.Full;
             var solution = await SolutionSet.FetchSolutionMetdataAsync(id, cancellationToken);
-            var result = SolutionValidator.ValidateAsync(solution, cancellationToken);
+            var result = SolutionValidator.Validate(solution, cancellationToken);
             if (result == ValidationResult.Incomplete)
                 return SolutionServiceResult.Incomplete;
             if (result == ValidationResult.Invalid)

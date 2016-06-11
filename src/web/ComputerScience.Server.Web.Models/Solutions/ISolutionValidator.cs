@@ -4,6 +4,6 @@ namespace ComputerScience.Server.Web.Models.Solutions
 {
     public interface ISolutionValidator<in TSolution>
     {
-        ValidationResult ValidateAsync(TSolution solution, CancellationToken cancellationToken);
+        ValidationResult Validate(TSolution solution, CancellationToken cancellationToken);
     }
 }

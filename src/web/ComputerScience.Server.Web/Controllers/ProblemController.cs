@@ -1,5 +1,4 @@
-﻿using ComputerScience.Server.Web.Models;
-using ComputerScience.Server.Web.Models.Exception;
+﻿using ComputerScience.Server.Web.Models.Exception;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -7,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using ComputerScience.Server.Web.Business.Solutions;
 using ComputerScience.Server.Web.Configuration;
-using ComputerScience.Server.Web.Data.SolutionCache;
 using ComputerScience.Server.Web.Models.Requests;
 using ComputerScience.Server.Web.Models.Response;
 using ComputerScience.Server.Web.Models.Solutions;

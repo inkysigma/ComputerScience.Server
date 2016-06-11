@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ComputerScience.Server.Web.Business.Solutions;
+﻿using ComputerScience.Server.Web.Business.Solutions;
 
 namespace ComputerScience.Server.Web.Models.Response
 {
