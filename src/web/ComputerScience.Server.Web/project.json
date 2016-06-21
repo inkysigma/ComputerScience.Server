@@ -14,16 +14,18 @@
     "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
-    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-rc1-final",
+    "Newtonsoft.Json": "8.0.3",
     "ComputerScience.Server.Web.Data": "1.0.0-*",
     "ComputerScience.Server.Web.Models": "1.0.0-*",
-    "ComputerScience.Server.Web.Business": "1.0.0-*" 
+    "ComputerScience.Server.Web.Business": "1.0.0-*",
+    "StackExchange.Redis": "1.1.604-alpha", 
+    "Npgsql": "3.1.4"
   },
 
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
-      "version": "1.0.0-preview1-final",
-      "imports": "portable-net45+win8+dnxcore50+netstandard15"
+      "version": "1.0.0-preview1-*",
+      "imports": "portable-net45+win8+dnxcore50"
     }
   },
 
@@ -60,3 +62,4 @@
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }
+

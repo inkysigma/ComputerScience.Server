@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
+using Microsoft.Extensions.Configuration;
 
 namespace ComputerScience.Server.Grader
 {
@@ -10,6 +11,7 @@ namespace ComputerScience.Server.Grader
 
         public static void Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder();
         }
     }
 }

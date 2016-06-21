@@ -17,7 +17,7 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
         public string Table { get; }
         public int Limit { get; set; }
 
-        public ProblemSet(DbConnection connection, string table, int limit = -1)
+        public ProblemSet(DbConnection connection, string table = "problems", int limit = -1)
         {
             Connection = connection;
             Table = table;
@@ -45,7 +45,7 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                 throw new ArgumentNullException(nameof(id));
             Handle(cancellationToken);
 
-            var problems = await Connection.QueryAsync<Problem>($"SELECT * FROM {Table} WHERE Guid=@id", new {id});
+            var problems = await Connection.QueryAsync<Problem>($"SELECT * FROM {Table} WHERE Id=@id", new {id});
             return problems.FirstOrDefault();
         }
 
@@ -63,7 +63,7 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                         new {title, Limit});
         }
 
-        public async Task<int> AddProblemAsync(Problem problem, CancellationToken cancellationToken)
+        public async Task<int> AddProblemAsync(string id, Problem problem, CancellationToken cancellationToken)
         {
             if (problem == null)
                 throw new ArgumentNullException(nameof(problem));
@@ -71,16 +71,16 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
             return
                 await
                     Connection.ExecuteAsync(
-                        $"INSERT INTO {Table}(Guid, Title, ProblemStatement, SolutionSize, ProblemPath, ProblemFile) " +
-                        "VALUES(@Guid, @Title, @ProblemStatement, @SolutionSize, @ProblemPath, @ProblemFile)",
+                        $"INSERT INTO {Table}(Id, Title, ProblemStatement, SolutionSize, ProblemPath, ProblemFile, TestCases) " +
+                        "VALUES(@Id, @Title, @ProblemStatement, @SolutionSize, @ProblemPath, @TestCases)",
                         new
                         {
-                            problem.Guid,
+                            Id = id,
                             problem.Title,
                             problem.ProblemStatement,
                             problem.SolutionSize,
-                            problem.ProblemFile,
-                            problem.ProblemPath
+                            problem.ProblemPath,
+                            problem.TestCases
                         });
         }
 
@@ -95,16 +95,16 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                 await
                     Connection.ExecuteAsync(
                         $"UPDATE {Table}" +
-                        "SET Title=@Title, ProblemStatement=@ProblemStatement, SolutionSize=@SolutionSize, ProblemFile=@ProblemFile, ProblemPath=@ProblemPath" +
-                        "WHERE Guid=@Guid",
+                        "SET Title=@Title, ProblemStatement=@ProblemStatement, SolutionSize=@SolutionSize, ProblemPath=@ProblemPath, TestCases=@TestCases" +
+                        "WHERE Id=@Id",
                         new
                         {
-                            problem.Guid,
+                            problem.Id,
                             problem.Title,
                             problem.ProblemStatement,
                             problem.SolutionSize,
-                            problem.ProblemFile,
-                            problem.ProblemPath
+                            problem.ProblemPath,
+                            problem.TestCases
                         });
         }
 
@@ -114,10 +114,10 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                 throw new ArgumentNullException(nameof(id));
             Handle(cancellationToken);
             return await Connection.ExecuteAsync(
-                       $"REMOVE FROM {Table} WHERE Guid=@Guid",
+                       $"REMOVE FROM {Table} WHERE Id=@Id",
                        new
                        {
-                           id
+                           Id = id
                        });
         }
     }

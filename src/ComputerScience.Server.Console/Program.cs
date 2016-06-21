@@ -1,5 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 
 namespace ComputerScience.Server.Console
@@ -13,24 +15,14 @@ namespace ComputerScience.Server.Console
 
         public static void Main(string[] args)
         {
-            WebServer = new Process
-            {
-                StartInfo = new ProcessStartInfo("dotnet", "run ComputerScience.Server.Web")
-                {
-                    CreateNoWindow = true,
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    WorkingDirectory = "..\\ComputerScience.Server.Web"
-                }
-            };
-
-            WebServer.Start();
-
-            System.Console.WriteLine("Web server has started.");
+            var thread = new Thread(Web.Program.Main);
+            thread.Start();
             while (IsRunning)
             {
-                if (!string.IsNullOrEmpty(WebServer.StandardOutput.ReadLine()))
-                    System.Console.WriteLine(WebServer.StandardOutput.ReadLine());
+                var key = System.Console.ReadKey();
+
+                if (key == new ConsoleKeyInfo('c', ConsoleKey.C, false, false, false))
+                    break;
             }
         }
     }

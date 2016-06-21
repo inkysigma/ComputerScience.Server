@@ -5,6 +5,8 @@
         Success,
         Failure,
         FileSizeError,
+        Full,
+        FileTypeError,
         IdentificationError,
         ProblemIdentificationError
     }

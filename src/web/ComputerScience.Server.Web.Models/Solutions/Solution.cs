@@ -13,5 +13,15 @@
         public string File { get; set; }
 
         public string ProblemId { get; set; }
+
+        public SolutionType SolutionType { get; set; } = SolutionType.None;
+    }
+
+    public enum SolutionType
+    {
+        None,
+        Cpp,
+        Java,
+        Python
     }
 }

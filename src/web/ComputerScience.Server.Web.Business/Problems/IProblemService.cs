@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using ComputerScience.Server.Web.Models.Problems;
 
 namespace ComputerScience.Server.Web.Business.Problems
 {
-    public interface IProblemService<TProblem>
+    public interface IProblemService<TProblem> : IDisposable
     {
-        Task AddProblemAsync(TProblem problem, CancellationToken cancellationToken);
+        Task AddProblemAsync(string id, TProblem problem, CancellationToken cancellationToken);
 
         Task<TProblem> FetchProblemAsync(string id, CancellationToken cancellationToken);
 
@@ -16,6 +16,8 @@ namespace ComputerScience.Server.Web.Business.Problems
         Task<IEnumerable<TProblem>> FetchProblemByRankAsync(CancellationToken cancellationToken);
 
         Task UpdateProblemAsync(string id, TProblem problem, CancellationToken cancellationToken);
+
+        Task<bool> Exists(string guid, CancellationToken cancellationToken);
 
         Task RemoveProblemAsync(string id, CancellationToken cancellelToken);
     }

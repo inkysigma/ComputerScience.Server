@@ -1,21 +1,22 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerScience.Server.Web.Business.Solutions;
 using ComputerScience.Server.Web.Data.SolutionCache;
 using ComputerScience.Server.Web.Data.SolutionSet;
 using ComputerScience.Server.Web.Models;
 using ComputerScience.Server.Web.Models.Solutions;
 
 namespace ComputerScience.Server.Web.Business.Solutions
-{
-    public class SolutionService<TSolution>
+{ 
+    public class SolutionService<TSolution> : ISolutionService<TSolution>
     {
         public ISolutionCache<TSolution> SolutionCache { get; }
-        public ISolutionMetadataSet<TSolution> SolutionSet { get; }
+        public ISolutionSet<TSolution> SolutionSet { get; }
         public ISolutionValidator<TSolution> SolutionValidator { get; }
         public SolutionServiceConfiguration Configuration { get; }
 
-        public SolutionService(ISolutionCache<TSolution> solutionCache, ISolutionMetadataSet<TSolution> solutionSet,
+        public SolutionService(ISolutionCache<TSolution> solutionCache, ISolutionSet<TSolution> solutionSet,
             ISolutionValidator<TSolution> validator, SolutionServiceConfiguration configuration)
         {
             SolutionCache = solutionCache;
@@ -32,15 +33,15 @@ namespace ComputerScience.Server.Web.Business.Solutions
             return await SolutionSet.FetchSolutionMetdataAsync(id, cancellationToken);
         }
 
-        public async Task<SolutionServiceResult> AddSolutionSet(TSolution solution, CancellationToken cancellationToken)
+        public async Task<SolutionServiceResult> AddSolutionSet(string guid, TSolution solution, CancellationToken cancellationToken)
         {
             if (solution == null)
                 throw new ArgumentNullException(nameof(solution));
             cancellationToken.ThrowIfCancellationRequested();
-            await SolutionSet.ClearSolutionMetadaAsync();
-            if (await SolutionSet.FetchSizeAsync() > Configuration.MaxSet)
+            await SolutionSet.ClearSolutionMetadaAsync(cancellationToken);
+            if (await SolutionSet.FetchSizeAsync(cancellationToken) > Configuration.MaxSet)
                 return SolutionServiceResult.Full;
-            await SolutionSet.AddSolutionMetadataAsync(solution, cancellationToken);
+            await SolutionSet.AddSolutionMetadataAsync(guid, solution, cancellationToken);
             return SolutionServiceResult.Success;
         }
 

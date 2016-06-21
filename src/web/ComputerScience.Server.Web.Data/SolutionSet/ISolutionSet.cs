@@ -1,18 +1,19 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ComputerScience.Server.Web.Data.SolutionSet
 {
-    public interface ISolutionMetadataSet<TSolution>
+    public interface ISolutionSet<TSolution> : IDisposable
     {
         Task<TSolution> FetchSolutionMetdataAsync(string id, CancellationToken cancellationToken);
 
-        Task AddSolutionMetadataAsync(TSolution solution, CancellationToken cancellationToken);
+        Task AddSolutionMetadataAsync(string id, TSolution solution, CancellationToken cancellationToken);
 
         Task RemoveSolutionMetadataAsync(string id, CancellationToken cancellationToken);
 
-        Task<int> FetchSizeAsync();
+        Task<int> FetchSizeAsync(CancellationToken cancellationToken);
 
-        Task ClearSolutionMetadaAsync();
+        Task ClearSolutionMetadaAsync(CancellationToken cancellationToken);
     }
 }

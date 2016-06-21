@@ -2,7 +2,7 @@
 {
     public class Problem
     {
-        public string Guid { get; set; }
+        public string Id { get; set; }
 
         public string Title { get; set; }
 
@@ -10,8 +10,8 @@
 
         public long SolutionSize { get; set; }
 
-        public string ProblemPath { get; set; }
+        public int TestCases { get; set; }
 
-        public string ProblemFile { get; set; }
+        public string ProblemPath { get; set; }
     }
 }

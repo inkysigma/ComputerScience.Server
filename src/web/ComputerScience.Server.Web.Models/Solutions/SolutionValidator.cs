@@ -10,7 +10,8 @@ namespace ComputerScience.Server.Web.Models.Solutions
         public ValidationResult Validate(Solution solution, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(solution.FileLocation) || string.IsNullOrEmpty(solution.Id) ||
-                string.IsNullOrEmpty(solution.ProblemId) || string.IsNullOrEmpty(solution.User))
+                string.IsNullOrEmpty(solution.ProblemId) || string.IsNullOrEmpty(solution.User) || 
+                solution.SolutionType == SolutionType.None)
                 return ValidationResult.Invalid;
             if (!File.Exists(solution.FileLocation))
                 return ValidationResult.Incomplete;

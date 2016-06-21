@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ComputerScience.Server.Web.Data.ProblemSet;
@@ -11,32 +10,55 @@ namespace ComputerScience.Server.Web.Business.Problems
     {
         public IProblemSet<TProblem> ProblemSet { get; }
 
-        public bool IsDisposed { get; } = false;
+        public bool IsDisposed { get; private set; } = false;
 
-        public ProblemService(IProblemSet<TProblem> problemSet, bool isDisposed)
+        private void Handle(CancellationToken cancellationToken)
+        {
+            if (IsDisposed)
+                throw new ObjectDisposedException(nameof(ProblemService<TProblem>));
+            cancellationToken.ThrowIfCancellationRequested();
+        }
+
+        public ProblemService(IProblemSet<TProblem> problemSet)
         {
             ProblemSet = problemSet;
-            IsDisposed = isDisposed;
         }
 
-        public Task AddProblemAsync(TProblem problem, CancellationToken cancellationToken)
+        public async Task AddProblemAsync(string id, TProblem problem, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+            Handle(cancellationToken);
+            await ProblemSet.AddProblemAsync(id, problem, cancellationToken);
         }
 
-        public Task<TProblem> FetchProblemAsync(string id, CancellationToken cancellationToken)
+        public async Task<TProblem> FetchProblemAsync(string id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentNullException(nameof(id));
+            Handle(cancellationToken);
+            return await ProblemSet.FetchProblemAsync(id, cancellationToken);
         }
 
-        public Task<IEnumerable<TProblem>> FetchProblemByTitleAsync(string title, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TProblem>> FetchProblemByTitleAsync(string title, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(title))
+                throw new ArgumentNullException(nameof(title));
+            Handle(cancellationToken);
+            return await ProblemSet.FetchProblemByTitleAsync(title, cancellationToken);
         }
 
         public Task<IEnumerable<TProblem>> FetchProblemByRankAsync(CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> Exists(string guid, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(guid))
+                throw new ArgumentNullException(nameof(guid));
+            Handle(cancellationToken);
+            return (await FetchProblemAsync(guid, cancellationToken)) != null;
         }
 
         public Task UpdateProblemAsync(string id, TProblem problem, CancellationToken cancellationToken)
@@ -47,6 +69,14 @@ namespace ComputerScience.Server.Web.Business.Problems
         public Task RemoveProblemAsync(string id, CancellationToken cancellelToken)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            if (IsDisposed)
+                return;
+            ProblemSet.Dispose();
+            IsDisposed = true;
         }
     }
 }

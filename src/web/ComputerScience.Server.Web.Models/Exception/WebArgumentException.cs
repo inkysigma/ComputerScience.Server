@@ -4,10 +4,11 @@ namespace ComputerScience.Server.Web.Models.Exception
 {
     public class WebArgumentException : CommonException
     {
-        public WebArgumentException(string parameter, string api)
+        public WebArgumentException(string parameter, string action, string value)
             : base(
-                403, true, "The client appears to have not worked.", parameter,
-                $"Please look at the API for {api} to determine the correct parameters")
+                400, true, "Something seems to have went wrong. Please check again later.",
+                parameter, $"Request for {action} has {parameter} incomplete and has value {value}. " +
+                           $"Please check api docs.")
         {
 
         }

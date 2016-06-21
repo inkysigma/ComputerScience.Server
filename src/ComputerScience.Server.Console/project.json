@@ -5,9 +5,21 @@
   },
 
   "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0-rc2-3002702",
+      "type": "platform"
+    },
+    "ComputerScience.Server.Web": "1.0.0-*"
   },
 
   "frameworks": {
-    "dnx46": {}
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8",
+        "netstandard1.5"
+      ]
+    }
   }
 }

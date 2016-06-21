@@ -54,7 +54,6 @@ namespace ComputerScience.Server.Console
         public void Abort()
         {
             IsRunning = false;
-            Thread.Abort();
         }
     }
 }
