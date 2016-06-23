@@ -12,13 +12,11 @@ namespace ComputerScience.Server.Web.Data.SolutionCache
     // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class SolutionCache : ISolutionCache<Solution>
     {
-        public IServer Server { get; }
         public IDatabase Database { get; }
         public string Table { get; }
 
-        public SolutionCache(IServer server, IConnectionMultiplexer connection, string table = "solutionQueue")
+        public SolutionCache(IConnectionMultiplexer connection, string table = "solutionQueue")
         {
-            Server = server;
             Database = connection.GetDatabase(0);
             Table = table;
         }
@@ -50,7 +48,7 @@ namespace ComputerScience.Server.Web.Data.SolutionCache
         public async Task<long> FetchSizeAsync(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Server.DatabaseSizeAsync();
+            return await Database.SortedSetLengthAsync(Table);
         }
     }
 }

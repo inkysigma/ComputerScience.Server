@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ComputerScience.Server.Web.Business.Solutions;
 using ComputerScience.Server.Web.Data.SolutionCache;
 using ComputerScience.Server.Web.Data.SolutionSet;
 using ComputerScience.Server.Web.Models;
