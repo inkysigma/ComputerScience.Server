@@ -7,6 +7,7 @@ namespace ComputerScience.Server.Grader
     {
         public ISolutionCache<Solution> SolutionCache { get; }
         public IProblemSet<Problem> ProblemSet { get; }
+
         public string Directory { get; }
 
         public Grader(ISolutionCache<Solution> solutionCache, IProblemSet<Problem> problemSet, string directory)
@@ -21,7 +22,7 @@ namespace ComputerScience.Server.Grader
             while (Program.IsRunning)
             {
                 var solution = await SolutionCache.Fetch();
-
+                
             }
         }
     }
