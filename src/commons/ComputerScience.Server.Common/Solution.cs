@@ -1,0 +1,27 @@
+﻿namespace ComputerScience.Server.Common
+{
+    public class Solution
+    {
+        public long TimeStamp { get; set; }
+
+        public string User { get; set; }
+
+        public string Id { get; set; }
+
+        public string FileLocation { get; set; }
+
+        public string File { get; set; }
+
+        public string ProblemId { get; set; }
+
+        public SolutionType SolutionType { get; set; } = SolutionType.None;
+    }
+
+    public enum SolutionType
+    {
+        None,
+        Cpp,
+        Java,
+        Python
+    }
+}

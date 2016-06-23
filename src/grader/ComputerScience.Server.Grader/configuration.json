@@ -1,3 +1,15 @@
 ﻿{
-
+  "ServerConfiguration": {
+    "ThreadCount": 4,
+    "DatabaseUser": "default",
+    "DatabasePassword": "password",
+    "Database": "compsci",
+    "Directories": [
+      "Grading/First",
+      "Grading/Second",
+      "Grading/Third",
+      "Grading/Fourth"
+    ],
+    "RelativeDirectories": true
+  }
 }
