@@ -58,7 +58,7 @@ namespace ComputerScience.Server.Web
 
             services.AddTransient<ISolutionCache<Solution>>(
                 provider =>
-                        new SolutionCache(provider.GetService<IServer>(), provider.GetService<IConnectionMultiplexer>()));
+                        new SolutionCache(provider.GetService<IConnectionMultiplexer>()));
 
             services.AddTransient<ISolutionSet<Solution>>(provider => new SolutionSet(new SolutionSetConfiguration(), provider.GetService<DbConnection>()));
 
