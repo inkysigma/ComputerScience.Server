@@ -3,6 +3,7 @@
       "ComputerScience.Server.Web.Data": "1.0.0-*",
       "ComputerScience.Server.Web.Models": "1.0.0-*",
       "ComputerScience.Server.Web.Business": "1.0.0-*",
+      "ComputerScience.Server.Grader": "1.0.0-*",
       "StackExchange.Redis": "1.1.604-alpha",
       "Npgsql": "3.1.4",
       "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
@@ -44,8 +45,9 @@
   },
 
   "buildOptions": {
+    "preserveCompilationContext": true,
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "debugType": "portable"
   },
 
   "runtimeOptions": {
