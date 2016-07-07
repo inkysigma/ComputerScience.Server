@@ -7,10 +7,10 @@ namespace ComputerScience.Server.Web
 {
     public class Program
     {
-        static IWebHost host;
+        public static IWebHost Host;
         public static void Main()
         {
-            host = new WebHostBuilder()
+            Host = new WebHostBuilder()
                 .UseKestrel()
                 .UseUrls("https://unix:/etc/inetpub/compsci/ComputerScience.Server.Web/kestrel.sock")
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -18,12 +18,12 @@ namespace ComputerScience.Server.Web
                 .Build();
 
             Console.WriteLine("Stable");
-            host.Run();
+            Host.Run();
         }
 
         public static void Stop()
         {
-            host.Dispose();
+            Host.Dispose();
         }
     }
 }
