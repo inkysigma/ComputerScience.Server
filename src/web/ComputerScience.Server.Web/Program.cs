@@ -15,7 +15,7 @@ namespace ComputerScience.Server.Web
                 .UseStartup<Startup>()
                 .Build();
 
-            Console.Write("Stable");
+            Console.WriteLine("Stable");
             host.Run();
         }
     }
