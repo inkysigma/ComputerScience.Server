@@ -17,6 +17,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Npgsql;
 using StackExchange.Redis;
+using ComputerScience.Server.Web.Formatters;
+using System.Buffers;
 
 namespace ComputerScience.Server.Web
 {
@@ -81,7 +83,10 @@ namespace ComputerScience.Server.Web
                 FileLocation = Configuration["FileLocation"]
             });
 
-            services.AddMvc();
+            services.AddMvc(c => {
+                c.OutputFormatters.Clear();
+                c.OutputFormatters.Add(new StandardOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared));
+             });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

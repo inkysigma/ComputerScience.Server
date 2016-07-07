@@ -1,5 +1,5 @@
 {
-  "projects": [ "src", "test", "src/grader", "src/web" ],
+  "projects": [ "src", "test", "src/grader", "src/web", "src/commons" ],
   "sdk": {
     "version": "1.0.0-preview1-002702"
   }

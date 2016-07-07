@@ -10,7 +10,7 @@ namespace ComputerScience.Server.Console
         public static volatile bool IsRunning = true;
         public static volatile Process WebServer;
 
-        public static ConcurrentDictionary<string, Thread> OutputThreads { get; set; } 
+        public static ConcurrentDictionary<string, Thread> OutputThreads { get; set; }
 
         public static void Main(string[] args)
         {

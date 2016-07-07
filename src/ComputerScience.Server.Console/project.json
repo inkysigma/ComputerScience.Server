@@ -5,8 +5,11 @@
   },
 
   "dependencies": {
-    "Microsoft.NETCore.App": "1.0.0",
     "ComputerScience.Server.Web": "1.0.0-*"
+  },
+
+  "commands": {
+    "run": "ComputerScience.Server.Console"
   },
 
   "frameworks": {
@@ -16,7 +19,13 @@
         "dnxcore50",
         "portable-net45+win8",
         "netstandard1.5"
-      ]
+      ],
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0",
+          "type": "platform"
+        }
+      }
     }
   }
 }
