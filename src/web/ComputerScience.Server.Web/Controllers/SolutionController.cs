@@ -31,6 +31,12 @@ namespace ComputerScience.Server.Web.Controllers
             Configuration = configuration;
         }
 
+        [HttpGet]
+        public string Test()
+        {
+            return "Hello";
+        }
+
         [HttpPost]
         public async Task<RequestProblemSubmission> RequestSolutionSubmission(SolutionSubmission submission, CancellationToken token)
         {
