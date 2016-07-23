@@ -244,3 +244,6 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /src/ComputerScience.Server.Grader/configuration.json
+
+# ApplicationSettings
+**/appsettings.json
