@@ -4,6 +4,7 @@
   "dependencies": {
     "ComputerScience.Server.Web.Data": "1.0.0-*",
     "ComputerScience.Server.Web.Models": "1.0.0-*",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "NETStandard.Library": "1.6.0"
   },
 
