@@ -1,4 +1,5 @@
-﻿using ComputerScience.Server.Web.Models.Solutions;
+﻿using ComputerScience.Server.Common;
+using ComputerScience.Server.Web.Models.Solutions;
 
 namespace ComputerScience.Server.Web.Models.Requests
 {

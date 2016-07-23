@@ -4,15 +4,16 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerScience.Server.Common;
 using ComputerScience.Server.Web.Business.Problems;
 using ComputerScience.Server.Web.Business.Solutions;
 using ComputerScience.Server.Web.Configuration;
-using ComputerScience.Server.Web.Models.Problems;
 using ComputerScience.Server.Web.Models.Requests;
 using ComputerScience.Server.Web.Models.Response;
 using ComputerScience.Server.Web.Models.Solutions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Problem = ComputerScience.Server.Web.Models.Problems.Problem;
 
 namespace ComputerScience.Server.Web.Controllers
 {

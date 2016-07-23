@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerScience.Server.Common;
 using ComputerScience.Server.Web.Models.Solutions;
 using Newtonsoft.Json;
 using StackExchange.Redis;

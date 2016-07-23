@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading;
+using ComputerScience.Server.Common;
 
 namespace ComputerScience.Server.Web.Models.Solutions
 {

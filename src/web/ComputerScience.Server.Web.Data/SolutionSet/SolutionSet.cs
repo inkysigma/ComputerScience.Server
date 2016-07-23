@@ -3,7 +3,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ComputerScience.Server.Web.Models.Solutions;
+using ComputerScience.Server.Common;
 using Dapper;
 
 namespace ComputerScience.Server.Web.Data.SolutionSet

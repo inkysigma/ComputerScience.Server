@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Text;
 using ComputerScience.Server.Web.Business.Problems;
 using ComputerScience.Server.Web.Business.Solutions;
@@ -7,7 +8,6 @@ using ComputerScience.Server.Web.Data.ProblemSet;
 using ComputerScience.Server.Web.Data.SolutionCache;
 using ComputerScience.Server.Web.Data.SolutionSet;
 using ComputerScience.Server.Web.Middleware;
-using ComputerScience.Server.Web.Models.Problems;
 using ComputerScience.Server.Web.Models.Solutions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +19,13 @@ using Npgsql;
 using StackExchange.Redis;
 using ComputerScience.Server.Web.Formatters;
 using System.Buffers;
+using ComputerScience.Server.Common;
+using ComputerScience.Server.Web.Business;
+using ComputerScience.Server.Web.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Problem = ComputerScience.Server.Web.Models.Problems.Problem;
+using ComputerScience.Server.Web.Extentions;
 
 namespace ComputerScience.Server.Web
 {
@@ -43,15 +50,21 @@ namespace ComputerScience.Server.Web
         {
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<>();
+            services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration["Data:Default:EntityFramework"]));
 
-            services.AddTransient<DbConnection>(provider => new NpgsqlConnection(Configuration["ConnectionString"]));
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 8;
+                })
+                .AddEntityFrameworkStores<UserContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddTransient<DbConnection>(provider => new NpgsqlConnection(Configuration["Data:Default:ConnectionString"]));
 
             services.AddSingleton<IConnectionMultiplexer>(provider =>
             {
                 var builder = new StringBuilder();
-                var servers = JsonConvert.DeserializeObject<RedisConfiguration>(Configuration["Redis"]);
+                var servers = JsonConvert.DeserializeObject<RedisConfiguration>(Configuration["Data:Redis"]);
                 foreach (var server in servers.Servers)
                 {
                     builder.Append(server.Key + ":" + server.Value);
@@ -65,21 +78,12 @@ namespace ComputerScience.Server.Web
                 provider =>
                         new SolutionCache(provider.GetService<IConnectionMultiplexer>()));
 
-            services.AddTransient<ISolutionSet<Solution>>(provider => new SolutionSet(new SolutionSetConfiguration(), provider.GetService<DbConnection>()));
+            services.AddSolutionServices(f => f.GetService<DbConnection>(), f => f.GetService<ISolutionCache<Solution>>());
 
             services.AddTransient<IProblemSet<Problem>>(
                 provider => new ProblemSet(provider.GetService<DbConnection>(), "problems" ,10));
 
             services.AddTransient<IProblemService<Problem>>(provider => new ProblemService<Problem>(provider.GetService<IProblemSet<Problem>>()));
-
-            services.AddTransient<ISolutionService<Solution>>(
-                provider =>
-                    new SolutionService<Solution>(provider.GetService<ISolutionCache<Solution>>(),
-                        provider.GetService<ISolutionSet<Solution>>(), new SolutionValidator(),
-                        new SolutionServiceConfiguration()));
-
-            services.AddTransient<IProblemService<Problem>>(
-                provider => new ProblemService<Problem>(provider.GetService<IProblemSet<Problem>>()));
 
             services.AddSingleton(provider => new SolutionConfiguration
             {
@@ -101,6 +105,8 @@ namespace ComputerScience.Server.Web
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseRequireHttps();
+
+            app.UseIdentity();
 
             app.UseApplicationInsightsExceptionTelemetry();
 
