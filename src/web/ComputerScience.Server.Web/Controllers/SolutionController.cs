@@ -10,14 +10,12 @@ using ComputerScience.Server.Web.Business.Solutions;
 using ComputerScience.Server.Web.Configuration;
 using ComputerScience.Server.Web.Models.Requests;
 using ComputerScience.Server.Web.Models.Response;
-using ComputerScience.Server.Web.Models.Solutions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Problem = ComputerScience.Server.Web.Models.Problems.Problem;
 
 namespace ComputerScience.Server.Web.Controllers
 {
-    [Route("api/[controller]/[action]")]
     public class SolutionController : Controller
     {
         public IHostingEnvironment HostingEnvironment { get; }
@@ -32,13 +30,8 @@ namespace ComputerScience.Server.Web.Controllers
             Configuration = configuration;
         }
 
-        [HttpGet]
-        public string Test()
-        {
-            return "Hello";
-        }
-
         [HttpPost]
+        [Authorize]
         public async Task<RequestProblemSubmission> RequestSolutionSubmission(SolutionSubmission submission, CancellationToken token)
         {
             if (submission == null)
@@ -68,6 +61,7 @@ namespace ComputerScience.Server.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<PostFileResponse> PostFile(string guid, IFormFile file, CancellationToken token)
         {
             if (string.IsNullOrEmpty(guid))

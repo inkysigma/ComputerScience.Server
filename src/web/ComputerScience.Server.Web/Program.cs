@@ -9,14 +9,21 @@ namespace ComputerScience.Server.Web
     public class Program
     {
         public static IWebHost Host;
+        public static IConfigurationRoot Configuration;
         public static void Main()
         {
             var config = new ConfigurationBuilder()
-                .AddJsonFile("host.settings");
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("host.json");
+            Configuration = config.Build();
 
             Host = new WebHostBuilder()
-                .UseKestrel()
-                .UseUrls("https://unix:/etc/inetpub/compsci/ComputerScience.Server.Web/kestrel.sock")
+                .UseKestrel(options =>
+                {
+                    options.UseHttps("cert.cer");
+                })
+                .UseUrls(Configuration["Servers"])
+                .UseIISIntegration()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
