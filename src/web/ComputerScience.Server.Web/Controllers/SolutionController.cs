@@ -35,7 +35,9 @@ namespace ComputerScience.Server.Web.Controllers
         public async Task<RequestProblemSubmission> RequestSolutionSubmission(SolutionSubmissionViewModel submission, CancellationToken token)
         {
             if (submission == null)
-                throw new WebArgumentException(nameof(submission), nameof(RequestProblemSubmission), null);
+                throw new WebArgumentException(nameof(submission), nameof(RequestSolutionSubmission), null);
+            if (submission.ProblemId == null)
+                throw new WebArgumentException(nameof(submission), nameof(RequestSolutionSubmission), null);
             var guid = Guid.NewGuid().ToString();
             var path = Path.Combine(Configuration.FileLocation, guid);
 
