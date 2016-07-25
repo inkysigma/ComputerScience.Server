@@ -32,7 +32,7 @@ namespace ComputerScience.Server.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<RequestProblemSubmission> RequestSolutionSubmission(SolutionSubmission submission, CancellationToken token)
+        public async Task<RequestProblemSubmission> RequestSolutionSubmission(SolutionSubmissionViewModel submission, CancellationToken token)
         {
             if (submission == null)
                 throw new WebArgumentException(nameof(submission), nameof(RequestProblemSubmission), null);

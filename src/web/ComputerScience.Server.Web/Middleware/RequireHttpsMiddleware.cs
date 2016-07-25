@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace ComputerScience.Server.Web.Middleware
 {
@@ -17,7 +19,10 @@ namespace ComputerScience.Server.Web.Middleware
         public async Task Invoke(HttpContext httpContext)
         {
             if (!httpContext.Request.IsHttps)
+            {
+                httpContext.Response.Redirect("https://" + httpContext.Request.Path + httpContext.Request.QueryString);
                 return;
+            }
             await _next(httpContext);
         }
     }

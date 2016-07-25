@@ -8,9 +8,10 @@ using ComputerScience.Server.Web.Business;
 namespace ComputerScience.Server.Web.Business.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20160725045510_Add-Name")]
+    partial class AddName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");

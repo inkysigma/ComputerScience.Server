@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ComputerScience.Server.Common;
 using ComputerScience.Server.Web.Models.Response;
 using Microsoft.Extensions.Logging;
@@ -32,15 +30,11 @@ namespace ComputerScience.Server.Web.ExceptionHandling
             if (commonException != null)
             {
                 var e = commonException;
-                StatusCode = e.Code;
+                StatusCode = 200;
                 IsClientError = e.ClientError;
                 Developer = e.Developer;
                 Message = e.Message;
                 Information = e.Information;
-            }
-            else
-            {
-                StatusCode = 503;
             }
             Headers = new List<KeyValuePair<string, string>>
             {

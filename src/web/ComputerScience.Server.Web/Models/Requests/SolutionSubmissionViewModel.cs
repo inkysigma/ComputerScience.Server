@@ -3,7 +3,7 @@ using ComputerScience.Server.Web.Models.Solutions;
 
 namespace ComputerScience.Server.Web.Models.Requests
 {
-    public class SolutionSubmission
+    public class SolutionSubmissionViewModel
     {
         public string ProblemId { get; set; }
 

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace ComputerScience.Server.Web.Models.Requests
 {
-    public class Test
+    public class LoginViewModel
     {
-        public string Cool { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

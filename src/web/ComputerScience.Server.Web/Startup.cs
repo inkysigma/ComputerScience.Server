@@ -54,6 +54,9 @@ namespace ComputerScience.Server.Web
                 {
                     options.SignIn.RequireConfirmedEmail = true;
                     options.Password.RequiredLength = 8;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireLowercase = false;
                 })
                 .AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
@@ -94,9 +97,15 @@ namespace ComputerScience.Server.Web
 
             loggerFactory.AddDebug();
 
+            app.UseRequireHttps();
+
+            app.UseRequireUtfMiddleware();
+
+            app.UseCsrfProtectionMiddleware(Configuration["Server:Origin"], Configuration["Server:Referer"]);
+
             app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseRequireHttps();
+            app.UseRemoveKestrelHeader();
 
             app.UseIdentity();
 
