@@ -9,3 +9,6 @@ To get this running:
 	<li>Run "dotnet ef --startup-project database update"</li>
 	<li>Go to ComputerScience.Server.Console and run "dotnet run"</li>
 </ol>
+All requests to the API server should ensure that "X-Requested-With" == "XMLHttpRequest" and that the Origin and Referer match the 
+ones given in the template. In addition, ensure that the information passed is a JSON object in the body. The response should be a StandardResponse
+with Payload as the expected result of the Action
