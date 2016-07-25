@@ -1,0 +1,33 @@
+﻿[
+  /*The following is a template for appsettings.json. Include the objects in TWO seperate files */
+  {
+    "Logging": {
+      "IncludeScopes": false,
+      "LogLevel": {
+        "Default": "Debug",
+        "System": "Information",
+        "Microsoft": "Information"
+      }
+    },
+    "Data": {
+      "Redis": "<Insert IP of a Redis server here with Port eg localhost:1234>",
+      /* Setup a postgres server. Just make the role be a superuser to make things easier. */
+      "ConnectionString": "Host=<Insert IP use localhost>;Username=<Username of Role>;Password=<Password of Role>;Host=5432;Database=compsci",
+      "EntityFramework": "Host=<Insert IP use localhost>;Username=<Username of Role>;Password=<Password of Role>;Database=compsci"
+    },
+
+    "Server": {
+      "Origin": "localhost",
+      "Referer": "localhost"
+    },
+
+    "FileLocation": "<Insert random directory to save stuff to.>"
+  },
+
+  /*The following is a template for host.json */
+  {
+    "Servers": "https://localhost:44348"
+  }
+
+  /* Be sure to create a self-signed cert with the file cert.cer. The server rejects non-https requests. */
+]
