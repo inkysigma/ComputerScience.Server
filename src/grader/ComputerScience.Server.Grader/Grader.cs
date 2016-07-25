@@ -14,7 +14,10 @@ namespace ComputerScience.Server.Grader
 
         public string Directory { get; }
 
-        public Grader(ISolutionCache<Solution> solutionCache, IProblemSet<Problem> problemSet, Dictionary<SolutionType, ICompiler> compilers, string directory)
+        public Grader(ISolutionCache<Solution> solutionCache, 
+            IProblemSet<Problem> problemSet, 
+            Dictionary<SolutionType, ICompiler> compilers, 
+            string directory)
         {
             SolutionCache = solutionCache;
             ProblemSet = problemSet;

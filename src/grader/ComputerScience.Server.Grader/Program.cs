@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.IO;
 using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -24,7 +25,7 @@ namespace ComputerScience.Server.Grader
             configuration.AddEnvironmentVariables();
             ConfigurationRoot = configuration.Build();
 
-            Configuration = JsonConvert.DeserializeObject<ServerConfiguration>(ConfigurationRoot["ServerConfiguration"]);
+            Configuration = JsonConvert.DeserializeObject<ServerConfiguration>(File.ReadAllText("configuration.json"));
         }
     }
 }

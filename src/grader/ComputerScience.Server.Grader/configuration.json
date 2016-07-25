@@ -1,5 +1,4 @@
 ﻿{
-  "ServerConfiguration": {
     "ThreadCount": 4,
     "DatabaseUser": "default",
     "DatabasePassword": "password",
@@ -11,5 +10,4 @@
       "Grading/Fourth"
     ],
     "RelativeDirectories": true
-  }
 }

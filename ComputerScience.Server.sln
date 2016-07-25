@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ADD4D482-4C3C-48D9-900C-71DF5B63B950}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{165A2183-A51E-4B28-8693-C7EF05B38FA6}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Schemas\compsci.backup = ..\..\..\Schemas\compsci.backup
 		global.json = global.json
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ComputerScience.Server.Console", "src\ComputerScience.Server.Console\ComputerScience.Server.Console.xproj", "{E8E5B26E-23F0-4CA0-A316-75827A39736E}"
