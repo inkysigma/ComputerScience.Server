@@ -1,4 +1,6 @@
 ﻿{
+  "userSecretsId": "aspnet-ComputerScience.Server.Console-secrets",
+
   "version": "1.0.0-*",
   "buildOptions": {
     "emitEntryPoint": true
@@ -10,6 +12,10 @@
 
   "commands": {
     "run": "ComputerScience.Server.Console"
+  },
+
+  "tools": {
+    "Microsoft.Extensions.SecretManager.Tools": "1.0.0-preview2-final"
   },
 
   "frameworks": {

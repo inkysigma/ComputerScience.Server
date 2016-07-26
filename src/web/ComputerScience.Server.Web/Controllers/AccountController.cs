@@ -7,6 +7,8 @@ using ComputerScience.Server.Web.Models.Response;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Net.Http;
+using System.Threading;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -56,6 +58,13 @@ namespace ComputerScience.Server.Web.Controllers
             {
                 Succeeded = true
             };
+        }
+
+        [HttpPost]
+        public async Task<string> RequestRegister(CancellationToken cancellationToken)
+        {
+            var request = new HttpClient();
+            var response = await request.PostAsync();
         }
 
         [HttpPost]

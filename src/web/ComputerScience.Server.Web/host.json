@@ -1,0 +1,4 @@
+﻿{
+  "Servers":  "https://localhost:44348",
+  "Unix": "https://unix:/etc/inetpub/compsci/ComputerScience.Server.Web/kestrel.sock"
+}
