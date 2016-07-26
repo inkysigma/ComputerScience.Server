@@ -24,8 +24,8 @@ namespace ComputerScience.Server.Web.Models.Requests
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// The challenge key issued to the user. This should be obtained via
-        /// api/Account/RequestRegister
+        /// The challenge key issued to the user. This should be obtained through
+        /// Google's reCaptcha service with the site key 6Ldi9SUTAAAAAKVzSuUv6agU3Rqa2O-prgn0-SpQ
         /// </summary>
         public string Challenge { get; set; }
     }

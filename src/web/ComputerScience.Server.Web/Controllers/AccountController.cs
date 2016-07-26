@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ComputerScience.Server.Web.Models;
 using ComputerScience.Server.Web.Models.Exception;
@@ -9,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
+using ComputerScience.Server.Web.Configuration;
+using ComputerScience.Server.Web.Models.Internal;
+using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,11 +22,14 @@ namespace ComputerScience.Server.Web.Controllers
     {
         public UserManager<User> UserManager { get; set; }
         public SignInManager<User> SignInManager { get; set; }
+        public AccountControllerConfiguration Configuration { get; set; }
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, 
+            AccountControllerConfiguration configuration)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            Configuration = configuration;
         }
 
         [HttpPost]
@@ -38,6 +45,30 @@ namespace ComputerScience.Server.Web.Controllers
                 throw new WebArgumentException(nameof(model.Name), nameof(Register), null);
             if (string.IsNullOrEmpty(model.Password))
                 throw new WebArgumentException(nameof(model.Password), nameof(Register), null);
+            if (string.IsNullOrEmpty(model.Challenge))
+                throw new WebArgumentException(nameof(model.Challenge), nameof(Register), null);
+            var client = new HttpClient();
+            var response =
+                await
+                    client.PostAsync("https://www.google.com/recaptcha/api/siteverify",
+                        new StringContent(JsonConvert.SerializeObject(new
+                        {
+                            secret = Configuration.CaptchaSecret,
+                            response = model.Challenge,
+                            remoteip = HttpContext.Connection.RemoteIpAddress.ToString()
+                        })));
+            var data = JsonConvert.DeserializeObject<ReCaptchaResponse>(await response.Content.ReadAsStringAsync());
+            if (!data.Success || data.TimeStamp.ToUniversalTime() < DateTime.UtcNow - TimeSpan.FromHours(1))
+            {
+                return new RegisterResponse
+                {
+                    Succeeded = false,
+                    Errors = new List<string>
+                    {
+                        "The captcha was found to be invalid. Please try again."
+                    }
+                };
+            }
             var user = new User()
             {
                 Email = model.Email,
@@ -58,13 +89,6 @@ namespace ComputerScience.Server.Web.Controllers
             {
                 Succeeded = true
             };
-        }
-
-        [HttpPost]
-        public async Task<string> RequestRegister(CancellationToken cancellationToken)
-        {
-            var request = new HttpClient();
-            var response = await request.PostAsync();
         }
 
         [HttpPost]

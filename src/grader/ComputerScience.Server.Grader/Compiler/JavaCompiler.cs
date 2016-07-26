@@ -9,7 +9,6 @@ namespace ComputerScience.Server.Grader.Compiler
 {
     public class JavaCompiler : ICompiler
     {
-        public 
 
         public CompilerResult Compile(Solution solution, string directory)
         {

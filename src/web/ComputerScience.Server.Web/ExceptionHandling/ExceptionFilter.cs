@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using ComputerScience.Server.Common;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
@@ -33,7 +34,14 @@ namespace ComputerScience.Server.Web.ExceptionHandling
             }
             response.Body.Write(result, 0, result.Length);
             response.Body.Flush();
-            Logger.LogError(Page.StatusCode, exception, exception.Message);
+            if (exception is CommonException)
+            {
+                Logger.LogWarning(Page.StatusCode, exception, exception.Message);
+            }
+            else
+            {
+                Logger.LogError(Page.StatusCode, exception, exception.Message);
+            }
             context.ExceptionHandled = true;
         }
     }

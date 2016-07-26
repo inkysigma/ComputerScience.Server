@@ -83,6 +83,11 @@ namespace ComputerScience.Server.Web
 
             services.AddTransient<IProblemService<Problem>>(provider => new ProblemService<Problem>(provider.GetService<IProblemSet<Problem>>()));
 
+            services.AddTransient(provider => new AccountControllerConfiguration
+            {
+                CaptchaSecret = Configuration["Captcha:Secret"]
+            });
+
             services.AddMvc(c => {
                 c.OutputFormatters.Clear();
                 c.OutputFormatters.Add(new StandardOutputFormatter(new JsonSerializerSettings(), ArrayPool<char>.Shared));
