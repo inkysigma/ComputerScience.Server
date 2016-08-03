@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using ComputerScience.Server.Web.Business.Problems;
 using ComputerScience.Server.Web.Configuration;
 using ComputerScience.Server.Web.Data.ProblemSet;
@@ -16,11 +17,16 @@ using ComputerScience.Server.Web.Formatters;
 using System.Buffers;
 using ComputerScience.Server.Common;
 using ComputerScience.Server.Web.Business;
+using ComputerScience.Server.Web.Business.Email;
 using ComputerScience.Server.Web.ExceptionHandling;
 using ComputerScience.Server.Web.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ComputerScience.Server.Web.Extentions;
+using ComputerScience.Server.Web.Models.Internal.Templates;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.IO;
 
 namespace ComputerScience.Server.Web
 {
@@ -60,6 +66,20 @@ namespace ComputerScience.Server.Web
                 })
                 .AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
+
+
+            services.AddTransient<IEmailService, SmtpEmailService>(
+                provider =>
+                    new SmtpEmailService(Configuration["Email:Host"], Configuration["Email:Username"],
+                        Configuration["Email:Token"]));
+
+            services.AddScoped<RazorAccountVerificationEmailTemplate>();
+
+            services.AddScoped<RazorTemplateCollection>(provider => new RazorTemplateCollection(
+                new RazorAccountVerificationEmailTemplate(provider.GetService<IRazorViewEngine>(), 
+                provider.GetService<ITempDataProvider>(), 
+                provider.GetService<IServiceProvider>(),
+                Path.Combine(Configuration["WebServerPath"], "Models/Internal/Templates/Views/AccountVerificationEmailTemplatePage.cshtml"))));
 
             services.AddTransient<DbConnection>(provider => new NpgsqlConnection(Configuration["Data:Default:ConnectionString"]));
 

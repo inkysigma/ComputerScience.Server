@@ -9,7 +9,8 @@ namespace ComputerScience.Server.Common
     {
         public string Id { get; set; }
         public TestCase[] TestCases { get; set; }
-        public long TimeStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public string Error { get; set; }
     }
 
     public enum TestCase

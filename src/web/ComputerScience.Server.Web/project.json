@@ -26,7 +26,10 @@
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
     "Microsoft.EntityFrameworkCore.Tools.Core": "1.0.0-rc2-final",
     "Microsoft.EntityFrameworkCore": "1.0.0",
-    "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final"
+    "Microsoft.EntityFrameworkCore.Design": "1.0.0-preview2-final",
+    "Microsoft.AspNetCore.Razor": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.Razor": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.Razor.Host": "1.0.0"
   },
 
   "tools": {

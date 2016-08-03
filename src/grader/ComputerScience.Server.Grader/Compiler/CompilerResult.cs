@@ -4,6 +4,7 @@
     {
         public bool Succeeded { get; set; }
         public string Message { get; set; }
+        public string FilePath { get; set; }
 
         public static CompilerResult Fail(string message)
         {

@@ -12,8 +12,8 @@
     "Data": {
       "Redis": "<Insert IP of a Redis server here with Port eg localhost:1234>",
       /* Setup a postgres server. Just make the role be a superuser to make things easier. */
-      "ConnectionString": "Host=<Insert IP use localhost>;Username=<Username of Role>;Password=<Password of Role>;Host=5432;Database=compsci",
-      "EntityFramework": "Host=<Insert IP use localhost>;Username=<Username of Role>;Password=<Password of Role>;Database=compsci"
+      "ConnectionString": "Host=<Insert IP use localhost>;Username=<Username of Role>;Token=<Token of Role>;Host=5432;Database=compsci",
+      "EntityFramework": "Host=<Insert IP use localhost>;Username=<Username of Role>;Token=<Token of Role>;Database=compsci"
     },
 
     "Server": {
