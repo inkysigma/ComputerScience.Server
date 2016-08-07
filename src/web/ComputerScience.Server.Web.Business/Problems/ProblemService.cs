@@ -53,6 +53,14 @@ namespace ComputerScience.Server.Web.Business.Problems
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<TProblem>> FetchRandomProblemsAsync(int number, CancellationToken cancellationToken)
+        {
+            if (number < 0)
+                throw new ArgumentOutOfRangeException(nameof(number));
+            Handle(cancellationToken);
+            return await ProblemSet.FetchRandomProblems(number, cancellationToken);
+        }
+
         public async Task<bool> Exists(string guid, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(guid))

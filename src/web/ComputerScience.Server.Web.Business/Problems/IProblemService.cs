@@ -15,6 +15,8 @@ namespace ComputerScience.Server.Web.Business.Problems
 
         Task<IEnumerable<TProblem>> FetchProblemByRankAsync(CancellationToken cancellationToken);
 
+        Task<IEnumerable<TProblem>> FetchRandomProblemsAsync(int number, CancellationToken cancellationToken);
+
         Task UpdateProblemAsync(string id, TProblem problem, CancellationToken cancellationToken);
 
         Task<bool> Exists(string guid, CancellationToken cancellationToken);

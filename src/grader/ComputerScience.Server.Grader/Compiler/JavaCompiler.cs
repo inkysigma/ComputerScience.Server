@@ -13,6 +13,7 @@ namespace ComputerScience.Server.Grader.Compiler
         public CompilerResult Compile(Solution solution, string directory)
         {
             var path = Path.Combine(directory, solution.FileLocation, solution.File);
+            throw new NotImplementedException();
         }
     }
 }

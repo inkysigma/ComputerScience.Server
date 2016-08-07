@@ -120,5 +120,21 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                            Id = id
                        });
         }
+
+        public async Task<IEnumerable<Problem>> FetchRandomProblems(int number, CancellationToken cancellationToken)
+        {
+            if (number < 0)
+                throw new ArgumentOutOfRangeException(nameof(number));
+            Handle(cancellationToken);
+            var count = await Connection.QueryAsync<int>($"SELECT COUNT(*) FROM {Table}");
+            return
+                await
+                    Connection.QueryAsync<Problem>($"SELECT * FROM {Table} TABLESAMPLE SYSTEM(@count * @number / 100) LIMIT @number",
+                        new
+                        {
+                            count = count.FirstOrDefault(),
+                            number
+                        });
+        }
     }
 }

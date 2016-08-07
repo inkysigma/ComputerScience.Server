@@ -12,5 +12,6 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
         Task<int> AddProblemAsync(string id, TProblem problem, CancellationToken cancellationToken);
         Task<int> UpdateProblemAsync(string id, TProblem problem, CancellationToken cancellationToken);
         Task<int> RemoveProblemAsync(string id, CancellationToken cancellationToken);
+        Task<IEnumerable<TProblem>> FetchRandomProblems(int number, CancellationToken cancellationToken);
     }
 }

@@ -15,10 +15,11 @@
             };
         }
 
-        public static CompilerResult Succeed()
+        public static CompilerResult Succeed(string filePath)
         {
             return new CompilerResult
             {
+                FilePath = filePath,
                 Succeeded = true
             };
         }

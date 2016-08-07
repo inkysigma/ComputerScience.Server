@@ -1,4 +1,6 @@
-﻿namespace ComputerScience.Server.Common
+﻿using Newtonsoft.Json;
+
+namespace ComputerScience.Server.Common
 {
     public class Problem
     {
@@ -10,8 +12,10 @@
 
         public long SolutionSize { get; set; }
 
+        [JsonIgnore]
         public int TestCases { get; set; }
 
+        [JsonIgnore]
         public string ProblemPath { get; set; }
     }
 }

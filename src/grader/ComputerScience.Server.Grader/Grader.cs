@@ -21,6 +21,8 @@ namespace ComputerScience.Server.Grader
 
         public string Directory { get; }
 
+        public int TimeLimit { get; }
+
         private ILogger<Grader> Logger { get; }
 
         public Grader(ISolutionCache<Solution> solutionCache, 
@@ -29,7 +31,8 @@ namespace ComputerScience.Server.Grader
             Dictionary<SolutionType, ICompiler> compilers, 
             Dictionary<SolutionType, IExecutor> executors,
             ILogger<Grader> logger,
-            string directory)
+            string directory,
+            int limit)
         {
             SolutionCache = solutionCache;
             ProblemSet = problemSet;
@@ -38,6 +41,7 @@ namespace ComputerScience.Server.Grader
             Executors = executors;
             Directory = directory;
             Logger = logger;
+            TimeLimit = limit;
         }
         
         public void Start()
@@ -60,7 +64,8 @@ namespace ComputerScience.Server.Grader
                         Task.Run(async () => await ResultService.AddResultAsync(compileResult, CancellationToken.None)).Wait();
                         continue;
                     }
-                    Executors[solution.SolutionType].Run(result.FilePath);
+
+                    var executionResult = Executors[solution.SolutionType].Run(Directory, result.FilePath, TimeLimit);
                 }
                 catch (Exception e)
                 {
