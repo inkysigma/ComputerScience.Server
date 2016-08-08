@@ -16,6 +16,7 @@ namespace ComputerScience.Server.Console
         {
             var thread = new Thread(Web.Program.Main);
             thread.Start();
+            var graders = new Thread(Grader.Program.Main);
             while (IsRunning)
             {
                 var key = System.Console.ReadKey();

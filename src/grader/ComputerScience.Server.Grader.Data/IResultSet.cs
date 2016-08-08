@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ComputerScience.Server.Common;
 
 namespace ComputerScience.Server.Grader.Data
 {
-    public interface IResultSet : IDisposable
+    public interface IResultSet<TResult> : IDisposable
     {
-        Task AddResult(string id, DateTime timeStamp, string result, string error, CancellationToken cancellationToken);
+        Task AddResult(TResult result, CancellationToken cancellationToken);
     }
 }

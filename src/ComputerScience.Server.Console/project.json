@@ -7,7 +7,8 @@
   },
 
   "dependencies": {
-    "ComputerScience.Server.Web": "1.0.0-*"
+    "ComputerScience.Server.Web": "1.0.0-*",
+    "ComputerScience.Server.Grader": "1.0.0-*"
   },
 
   "commands": {

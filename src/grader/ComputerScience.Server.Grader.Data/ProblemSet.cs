@@ -14,7 +14,7 @@ namespace ComputerScience.Server.Grader.Data
         public string Table { get; }
         public bool IsDisposed { get; private set; }
 
-        public ProblemSet(DbConnection connection, string table )
+        public ProblemSet(DbConnection connection, string table = "problems")
         {
             Connection = connection;
             Table = table;

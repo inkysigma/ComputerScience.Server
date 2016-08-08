@@ -71,8 +71,8 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
             return
                 await
                     Connection.ExecuteAsync(
-                        $"INSERT INTO {Table}(Id, Title, ProblemStatement, SolutionSize, ProblemPath, ProblemFile, TestCases) " +
-                        "VALUES(@Id, @Title, @ProblemStatement, @SolutionSize, @ProblemPath, @TestCases)",
+                        $"INSERT INTO {Table}(Id, Title, ProblemStatement, SolutionSize, ProblemPath, ProblemFile, TestCases, NormalizedTitle, TimeLimit) " +
+                        "VALUES(@Id, @Title, @ProblemStatement, @SolutionSize, @ProblemPath, @TestCases, @NormalizedTitle, @TimeLimit)",
                         new
                         {
                             Id = id,
@@ -80,7 +80,9 @@ namespace ComputerScience.Server.Web.Data.ProblemSet
                             problem.ProblemStatement,
                             problem.SolutionSize,
                             problem.ProblemPath,
-                            problem.TestCases
+                            problem.TestCases,
+                            problem.NormalizedTitle,
+                            problem.TimeLimit
                         });
         }
 

@@ -9,17 +9,17 @@ using Newtonsoft.Json;
 
 namespace ComputerScience.Server.Grader
 {
-    public interface IResultSetService : IDisposable
+    public interface IResultSetService<TResult> : IDisposable
     {
-        Task AddResultAsync(Result result, CancellationToken cancellationToken);
+        Task AddResultAsync(TResult result, CancellationToken cancellationToken);
     }
 
-    public class ResultSetService : IResultSetService
+    public class ResultSetService<TResult> : IResultSetService<TResult>
     {
-        public IResultSet ResultSet { get; }
+        public IResultSet<TResult> ResultSet { get; }
         public bool IsDisposed { get; private set; } = false;
 
-        public ResultSetService(IResultSet resultSet)
+        public ResultSetService(IResultSet<TResult> resultSet)
         {
             ResultSet = resultSet;
         }
@@ -32,16 +32,15 @@ namespace ComputerScience.Server.Grader
             IsDisposed = true;
         }
 
-        public async Task AddResultAsync(Result result, CancellationToken cancellationToken)
+        public async Task AddResultAsync(TResult result, CancellationToken cancellationToken)
         {
             if (result == null)
                 throw new ArgumentNullException(nameof(result));
             if (IsDisposed)
-                throw new ObjectDisposedException(nameof(ResultSetService));
+                throw new ObjectDisposedException(nameof(ResultSetService<TResult>));
             cancellationToken.ThrowIfCancellationRequested();
             await
-                ResultSet.AddResult(result.Id, result.TimeStamp, JsonConvert.SerializeObject(result.TestCases),
-                    result.Error, cancellationToken);
+                ResultSet.AddResult(result, cancellationToken);
         }
     }
 }
